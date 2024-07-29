@@ -1,11 +1,9 @@
 package lt.techin.qateam;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.WheelInput;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -49,29 +47,32 @@ public class ProfilePage extends BasePage {
     @FindBy(css = "textarea#instructions")
     WebElement inputInstruction;
 
-    @FindBy(css = "#root > div:nth-child(3) > form > div:nth-child(6) > table > tbody > tr > td:nth-child(2) > button")
-    WebElement addIngridientButton;
+    @FindBy(css = "tbody tr:nth-of-type(1) .btn-primary")
+    WebElement addIngredientButton;
 
     @FindBy(css = "input[name='ingredients.0.title']")
-    WebElement ingridientOneInput;
+    WebElement ingredientOneInput;
 
     @FindBy(css = "input[name='ingredients.1.title']")
-    WebElement ingridientTwoInput;
+    WebElement ingredientTwoInput;
 
     @FindBy(css = "input[name='ingredients.2.title']")
-    WebElement ingridientThreeInput;
+    WebElement ingredientThreeInput;
 
     @FindBy(css = "input[name='ingredients.3.title']")
-    WebElement ingridientFourInput;
+    WebElement ingredientFourInput;
 
     @FindBy(css = "input[name='ingredients.4.title']")
-    WebElement ingridientFiveInput;
+    WebElement ingredientFiveInput;
 
     @FindBy(css = "input#timeInMinutes")
     WebElement timeInput;
 
     @FindBy(css = ".btn.submit-btn.w-100")
     WebElement addRecipeButton;
+
+    @FindBy(css = "th")
+    WebElement ingredientField;
 
     @FindBy(css="div[role='alert'] > div:nth-of-type(2)")
     WebElement warningMessage;
@@ -125,30 +126,31 @@ public class ProfilePage extends BasePage {
         inputDescription.sendKeys(recipeDescription);
     }
 
-    public void inputRecipeInsruction(String recipeInstruction) {
+    public void inputRecipeInstruction(String recipeInstruction) {
         inputInstruction.sendKeys(recipeInstruction);
     }
 
-    public void clickToAddIngridient(){addIngridientButton.click();}
+    public void clickToAddIngredient(){
+        addIngredientButton.click();}
 
-    public void inputIngridientOne(String ingridientOne) {
-        ingridientOneInput.sendKeys(ingridientOne);
+    public void inputIngredientOne(String ingridientOne) {
+        ingredientOneInput.sendKeys(ingridientOne);
     }
 
-    public void inputIngridientTwo(String ingridientTwo) {
-        ingridientTwoInput.sendKeys(ingridientTwo);
+    public void inputIngredientTwo(String ingridientTwo) {
+        ingredientTwoInput.sendKeys(ingridientTwo);
     }
 
-    public void inputIngridientThree(String ingridientThree) {
-        ingridientThreeInput.sendKeys(ingridientThree);
+    public void inputIngredientThree(String ingridientThree) {
+        ingredientThreeInput.sendKeys(ingridientThree);
     }
 
-    public void inputIngridientFour(String ingridientFour) {
-        ingridientFourInput.sendKeys(ingridientFour);
+    public void inputIngredientFour(String ingridientFour) {
+        ingredientFourInput.sendKeys(ingridientFour);
     }
 
-    public void inputIngridientFive(String ingridientFive) {
-        ingridientFiveInput.sendKeys(ingridientFive);
+    public void inputIngredientFive(String ingridientFive) {
+        ingredientFiveInput.sendKeys(ingridientFive);
     }
 
     public void inputTime(String time) {
@@ -169,22 +171,27 @@ public class ProfilePage extends BasePage {
         actions.sendKeys(Keys.PAGE_DOWN).perform();
     }
 
-    public void scrollToTimeInput() {
+    public void moveToTimeInput() {
         Actions actions = new Actions(driver);
         actions.moveToElement(timeInput).perform();
     }
 
-    public void scrollToListOfRecipes() {
+    public void moveToListOfRecipes() {
         Actions actions = new Actions(driver);
         actions.moveToElement(listOfRecipes).perform();
     }
 
-    public void scrollToButton() {
+    public void scrollToListOfRecipes() {
         Actions actions = new Actions(driver);
-        actions.moveToElement(addRecipeButton).perform();
-//        new Actions(driver)
-//                .scrollToElement(addRecipeButton)
-//                .perform();
+        actions.scrollToElement(listOfRecipes).perform();
+    }
+
+    public void scrollToIngredientField() {
+        Actions actions = new Actions(driver);
+        //actions.moveToElement(addRecipeButton).perform();
+//
+               actions.scrollToElement(ingredientField)
+                .perform();
     }
 
     public void moveMouseToAddRecipeButton(){
@@ -199,5 +206,10 @@ public class ProfilePage extends BasePage {
                 .perform();
     }
 
+//    public void getTextFromWarningMessage(){
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(warningMessage));
+//        warningMessage.getText();
+//    }
 
 }

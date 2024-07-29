@@ -21,8 +21,8 @@ public class BaseTest {
 
     }
 
-    @AfterEach
-    void teardown() {
-        driver.quit();
-    }
+//    @AfterEach
+//    void teardown() {
+//        driver.quit();
+//    }
 }

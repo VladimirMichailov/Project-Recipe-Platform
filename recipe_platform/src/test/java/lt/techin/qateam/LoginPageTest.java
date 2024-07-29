@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class LoginPageTest extends BaseTest{
+public class LoginPageTest extends BaseTest {
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/random_user_credentials_email_password_only.csv", numLinesToSkip = 1)
     void loginToPage(String email, String password) throws InterruptedException {
@@ -19,22 +19,22 @@ public class LoginPageTest extends BaseTest{
         loginPage.inputEmailToLogin(email);
         loginPage.inputPasswordToLogin(password);
         loginPage.clickToLogin();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.urlToBe("http://localhost:5173/recipes"));
-        Assertions.assertEquals("http://localhost:5173/recipes",driver.getCurrentUrl(),"web addresses not match");
+        loginPage.waitForNewPage();
+        Assertions.assertEquals("http://localhost:5173/recipes", driver.getCurrentUrl(), "web addresses not match");
+        Assertions.assertEquals("Login successfull!", loginPage.getSuccessLoginMessage(), "messages not match");
 
     }
-@Test
-    void loginToPage() throws InterruptedException {
+
+    @Test
+    void loginToPageStaticData() throws InterruptedException {
         RegistrationPage registrationPage = new RegistrationPage(driver);
         LoginPage loginPage = new LoginPage(driver);
         registrationPage.clickToLoginLink();
         loginPage.inputEmailToLogin("testas21@gmail.com");
         loginPage.inputPasswordToLogin("Testas+5");
         loginPage.clickToLogin();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.urlToBe("http://localhost:5173/recipes"));
-        Assertions.assertEquals("http://localhost:5173/recipes",driver.getCurrentUrl(),"web addresses not match");
-
+        loginPage.waitForNewPage();
+        Assertions.assertEquals("http://localhost:5173/recipes", driver.getCurrentUrl(), "web addresses not match");
+        Assertions.assertEquals("Login successfull!", loginPage.getSuccessLoginMessage(), "messages not match");
     }
 }

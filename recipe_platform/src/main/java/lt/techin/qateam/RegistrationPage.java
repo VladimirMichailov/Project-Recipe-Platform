@@ -1,9 +1,13 @@
 package lt.techin.qateam;
 
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class RegistrationPage extends BasePage {
     public RegistrationPage(WebDriver driver) {super(driver);}
@@ -20,7 +24,7 @@ public class RegistrationPage extends BasePage {
     WebElement registerButton;
     @FindBy(css = ".nav-login")
     WebElement linkToLogin;
-    @FindBy(css = "div[role='alert'] > div:nth-of-type(2)")
+    @FindBy(css = ".Toastify")
     WebElement registrationWarningMessage;
 
     public void inputUsername(String username){
@@ -42,6 +46,17 @@ public class RegistrationPage extends BasePage {
     public void clickToRegister(){registerButton.click();}
 
     public void clickToLoginLink(){linkToLogin.click();}
+
+    public void waitForNewPage(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.urlToBe("http://localhost:5173/login"));
+    }
+
+    public String getSuccessRegistrationMessage(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(new By.ByCssSelector(".Toastify")));
+        return registrationWarningMessage.getText();
+    }
 
 
 
