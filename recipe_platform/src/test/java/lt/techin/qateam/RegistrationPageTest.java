@@ -28,7 +28,7 @@ public class RegistrationPageTest extends BaseTest {
     void registerToPage() throws InterruptedException {
         RegistrationPage registrationPage = new RegistrationPage(driver);
         registrationPage.inputUsername("Testas7777");
-        registrationPage.inputEmail("testas7777@gmail.com");
+        registrationPage.inputEmail("testas77770@gmail.com");
         registrationPage.inputPassword("Testas+5");
         registrationPage.inputRepeatPassword("Testas+5");
         registrationPage.clickToRegister();

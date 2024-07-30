@@ -20,7 +20,7 @@ public class RegistrationPage extends BasePage {
     WebElement passwordInput;
     @FindBy(css = "#repeatPassword")
     WebElement repeatPasswordInput;
-    @FindBy(css = ".btn.submit-btn.w-100")
+    @FindBy(css = "[class='btn submit-btn w-100']")
     WebElement registerButton;
     @FindBy(css = ".nav-login")
     WebElement linkToLogin;
